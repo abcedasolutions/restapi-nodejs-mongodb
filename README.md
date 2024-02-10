@@ -13,9 +13,12 @@ Reto técnico
 -------------------------------------------------------------------------------------------------------------------------------------------
 DESPLEGANDO CONTENEDORES DOCKER Y SERVIDOR DE BASE DE DATOS MONGO EXPRESS
 (Usaremos la imagen de docker - mongo desde el portal hub.docker.com)
-https://hub.docker.com/_/mongo
-https://hub.docker.com/_/mongo-express
-la configuración de la imagen de mongo y mongo express se encuentra en el archivo docker-compose.yml en un entorno local
+- Descargar las imagenes en docker desktop:
+> https://hub.docker.com/_/mongo
+> 
+> https://hub.docker.com/_/mongo-express
+> 
+> la configuración de la imagen de mongo y mongo express se encuentra en el archivo docker-compose.yml en un entorno local
 -------------------------------------------------------------------------------------------------------------------------------------------
 > Paso 3. Ejecutar el siguiente comando en la consola de Visual Studio Code: docker-compose up -d    (Creará la carpeta data y ejecutara los contenedores configurados en docker-compose.yml, verificar que se este ejecutando Docker Desktop).
 > 
