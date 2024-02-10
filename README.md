@@ -24,7 +24,9 @@ DESPLEGANDO CONTENEDORES DOCKER Y SERVIDOR DE BASE DE DATOS MONGO EXPRESS
 > 
 > Paso 4. Ejecutar el siguiente comando en la consola de Visual Studio Code: docker ps -a            (sirve para listar los contenedores que estan corriendo)
 > 
-> Paso 5. (ejecutamos el servidor configurado en el puerto 3000 con el comando ) yarn dev
+> Paso 5. Ejecutar el comando: yarn dev
+> 
+> en el paso 5 verificar que en el equipo local el **puerto 3000** este disponible de lo contrario puede forzar el cierre ejecutando el siguiente comando en la terminal: **Stop-Process -Id (Get-NetTCPConnection -LocalPort “3000”).OwningProcess -Force**
 > 
 > Paso 6. Para ingresar al servidor Mongo Express en el navegador ingresar a la URL: http://localhost:8081/ y colocar las credenciales usuario:root y password:root
 # CONSUMIENDO APIREST DESDE UN POSTMAN O INSOMNIA:
