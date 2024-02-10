@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const {isValidEmail} = require('../helpers');
+const { current_user } = require('../controllers/userController');
 
 const UserSchema = mongoose.Schema({
     email: {
@@ -24,6 +25,8 @@ const UserSchema = mongoose.Schema({
 UserSchema.statics.signup = signup;
 UserSchema.statics.sendConfirmationEmail = sendConfirmationEmail;
 UserSchema.statics.confirmAccount = confirmAccount;
+UserSchema.statics.login = login;
+UserSchema.statics.findUserById = findUserById;
 
 mongoose.model('user',UserSchema, 'users');
 
@@ -85,4 +88,41 @@ function confirmAccount(token){
                     user.emailVerified = true;
                     return user.save();
                 })
+}
+function login(email, password){
+    if(!isValidEmail(email)) throw new Error('Email es invalido.');
+    return this.findOne({email})
+        .then(user =>{
+            if(!user) throw new Error('Credenciales incorrectas.')
+            if(!user.emailVerified) throw new Error('El usuario no ha verificado la cuenta email.')
+
+            const isCorrect= bcrypt.compareSync(password, user.password);
+            if(!isCorrect) throw new Error('La contraseña es incorrecta.');
+
+            const userObject = {
+                _id: user._id,
+                email: user.email,
+                emailVerified: user.emailVerified,
+            }
+
+            const access_token = jwt.sign(Object.assign({}, userObject), process.env.TOKEN_SECRET, {
+                expiresIn: 60*60*2,
+            });
+
+            return {
+                access_token,
+            }
+        })
+}
+
+function findUserById(_id){
+    return this.findById(_id)
+            .then(user => {
+                return {
+                        _id: user._id,
+                        email: user.email,
+                        emailVerified: user.emailVerified,
+                    }
+                }
+            )
 }
