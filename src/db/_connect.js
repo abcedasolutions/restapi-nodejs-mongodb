@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 function _conect(){
 
-    const URI = `mongodb://${process.env.user}:${process.env.password}@${process.env.MONGO_HOST}/${process.env.MONGO_DB}`;
+    const URI = `mongodb://${process.env.USER}:${process.env.PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DB}`;
     mongoose.connect(URI,{useNewUrlParser: true, useUnifiedTopology: true})
         .then(
             ()=>{
